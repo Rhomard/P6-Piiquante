@@ -1,8 +1,11 @@
 // On importe le modèle pour les users
 const User = require("../models/User");
 
-// on importe le package de cryptage de mot de passe
+// On importe le package de cryptage de mot de passe
 const bcrypt = require("bcrypt");
+
+// On importe le package jsonwebtoken qui va permettre de créer des tokens et de les vérifier
+const jwt = require("jsonwebtoken");
 
 // Middleware pour l'enregistrement de nouvels utilisateurs
 exports.signup = (req, res, next) => {
@@ -42,7 +45,8 @@ exports.login = (req, res, next) => {
                               // Si l'utilisateur entre le bon mot de passe
                               res.status(200).json({
                                     userId: user._id,
-                                    token: "TOKEN",
+                                    // On encode le userId pour que seul l'utilisateur qui a entré une sauce puisse la modifier ou supprimer
+                                    token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" }),
                               });
                         })
                         .catch((error) => res.status(500).json({ error }));

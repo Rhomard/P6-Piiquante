@@ -71,17 +71,31 @@ exports.modifySauce = (req, res, next) => {
 };
 
 exports.deleteSauce = (req, res, next) => {
-      Sauce.deleteOne({ _id: req.params.id })
-            .then(() => {
-                  res.status(200).json({
-                        message: "Deleted!",
+      Sauce.findOne({ _id: req.params.id }).then((sauce) => {
+            // Si l'id de la sauce n'existe pas
+            if (!sauce) {
+                  res.status(404).json({
+                        error: new Error("No such Sauce!"),
                   });
-            })
-            .catch((error) => {
-                  res.status(400).json({
-                        error: error,
+            }
+            // On vérifie si la sauce appartient à l'uilisateur
+            if (sauce.userId !== req.auth.userId) {
+                  res.status(401).json({
+                        error: new Error("Unauthorized request!"),
                   });
-            });
+            }
+            Sauce.deleteOne({ _id: req.params.id })
+                  .then(() => {
+                        res.status(200).json({
+                              message: "Deleted!",
+                        });
+                  })
+                  .catch((error) => {
+                        res.status(400).json({
+                              error: error,
+                        });
+                  });
+      });
 };
 
 exports.getAllSauce = (req, res, next) => {

@@ -7,6 +7,12 @@ const mongoose = require("mongoose");
 // On créé notre app
 const app = express();
 
+// On importe le routeur pour les sauces
+const sauceRoutes = require("./routes/sauce");
+
+// On importe le routeur pour les users
+const userRoutes = require("./routes/user");
+
 // Connexion avec la base de données
 mongoose
       .connect("mongodb+srv://Rhomard:mdpdatabase@piiquante-cluster.zee9n.mongodb.net/Piiquante?retryWrites=true&w=majority", {
@@ -23,6 +29,12 @@ app.use((req, res, next) => {
       res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
       next();
 });
+
+// On enregistre les routes pour les sauces
+app.use("/api/sauce", sauceRoutes);
+
+// On enregistre les routes pour les users
+app.use("/api/auth", userRoutes);
 
 // On exporte l'app
 module.exports = app;

@@ -13,6 +13,8 @@ const sauceRoutes = require("./routes/sauce");
 // On importe le routeur pour les users
 const userRoutes = require("./routes/user");
 
+app.use(express.json());
+
 // Connexion avec la base de données
 mongoose
       .connect("mongodb+srv://Rhomard:mdpdatabase@piiquante-cluster.zee9n.mongodb.net/Piiquante?retryWrites=true&w=majority", {

@@ -12,7 +12,13 @@ Ouvrir un terminal :
 
 ```bash
 cd front
+```
+
+```bash
 npm install
+```
+
+```bash
 npm start
 ```
 
@@ -24,6 +30,9 @@ Ouvrir un terminal :
 
 ```bash
 cd back
+```
+
+```bash
 npx nodemon server
 ```
 

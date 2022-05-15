@@ -13,6 +13,10 @@ const sauceRoutes = require("./routes/sauce");
 // On importe le routeur pour les users
 const userRoutes = require("./routes/user");
 
+// On donne accès au chemin de notre système de fichier
+const path = require("path");
+
+// Express prend toutes les requêtes qui ont comme Content-Type application/json et met à disposition leur body
 app.use(express.json());
 
 // Connexion avec la base de données
@@ -32,8 +36,11 @@ app.use((req, res, next) => {
       next();
 });
 
+// Middlware qui répond aux requêtes envoyées au dossier static /images
+app.use("/images", express.static(path.join(__dirname, "images")));
+
 // On enregistre les routes pour les sauces
-app.use("/api/sauce", sauceRoutes);
+app.use("/api/sauces", sauceRoutes);
 
 // On enregistre les routes pour les users
 app.use("/api/auth", userRoutes);

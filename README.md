@@ -10,9 +10,11 @@ Avoir installer **node** sur sa machine.
 
 Ouvrir un terminal :
 
-`cd front`
+```
+cd front
+```
 
-```bash
+```
 npm install
 ```
 

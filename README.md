@@ -18,7 +18,7 @@ cd front
 npm install
 ```
 
-```bash
+```
 npm start
 ```
 
@@ -28,11 +28,11 @@ npm start
 
 Ouvrir un terminal :
 
-```bash
+```
 cd back
 ```
 
-```bash
+```
 npx nodemon server
 ```
 

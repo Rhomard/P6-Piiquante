@@ -38,18 +38,23 @@ exports.getOneSauce = (req, res, next) => {
 exports.modifySauce = (req, res, next) => {
       Sauce.findOne({ _id: req.params.id })
             .then((sauce) => {
-                  const sauceObject = req.file
-                        ? {
-                                ...JSON.parse(req.body.sauce),
-                                imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-                          }
-                        : { ...req.body };
-                  const filename = sauce.imageUrl.split("/images/")[1];
-                  fs.unlink(`images/${filename}`, () => {
+                  if (req.file) {
+                        const sauceObject = {
+                              ...JSON.parse(req.body.sauce),
+                              imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+                        };
+                        const filename = sauce.imageUrl.split("/images/")[1];
+                        fs.unlink(`images/${filename}`, () => {
+                              Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
+                                    .then(() => res.status(200).json({ message: "Objet et image modifiés !" }))
+                                    .catch((error) => res.status(400).json({ error }));
+                        });
+                  } else if (!req.file) {
+                        const sauceObject = { ...req.body };
                         Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
                               .then(() => res.status(200).json({ message: "Objet modifié !" }))
                               .catch((error) => res.status(400).json({ error }));
-                  });
+                  }
             })
             .catch((error) => res.status(500).json({ error }));
 };
@@ -113,7 +118,7 @@ exports.likeDislike = (req, res, next) => {
                   valeursQuiChangent.dislikes = valeursQuiChangent.usersDisliked.length;
 
                   Sauce.updateOne({ _id: sauceId }, valeursQuiChangent)
-                        .then(() => res.status(200).json({ message: "Action sur le like prise en compte !" }))
+                        .then(() => res.status(200).json({ message: "Action sur le like ou dislike prise en compte !" }))
                         .catch((error) => res.status(400).json({ error }));
             })
 

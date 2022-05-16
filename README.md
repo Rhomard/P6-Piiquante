@@ -2,7 +2,7 @@
 
 ## Prérequis :
 
-Avoir installer **node** sur sa machine.
+Avoir installer **nodejs** sur sa machine.
 
 ## Installation :
 

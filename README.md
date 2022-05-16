@@ -17,7 +17,7 @@ cd front
 ```
 
 ```
-npm install
+npm i
 ```
 
 ```
@@ -35,11 +35,11 @@ cd back
 ```
 
 ```
-npm install
+npm i
 ```
 
 ```
-npx nodemon server
+npx nodemon
 ```
 
 :white_check_mark: &nbsp;Back

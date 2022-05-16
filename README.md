@@ -4,6 +4,8 @@
 
 Avoir installer **nodejs** sur sa machine.
 
+Si ce n'est pas le cas --> https://nodejs.org/en/download/
+
 ## Installation :
 
 **Pour le dossier front :**

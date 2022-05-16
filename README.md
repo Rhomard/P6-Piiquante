@@ -4,7 +4,7 @@
 
 Avoir installer **nodejs** sur sa machine.
 
-Si ce n'est pas le cas --> https://nodejs.org/en/download/
+Si ce n'est pas le cas :point_right: https://nodejs.org/en/download/
 
 ## Installation :
 

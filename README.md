@@ -33,6 +33,10 @@ cd back
 ```
 
 ```
+npm install
+```
+
+```
 npx nodemon server
 ```
 

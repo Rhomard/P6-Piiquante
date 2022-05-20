@@ -1,3 +1,7 @@
+// On créé l'accès aux variable du .env
+const dotenv = require("dotenv").config();
+const secretToken = process.env.SECRET_TOKEN;
+
 // On importe le package jsonwebtoken qui va permettre de créer des tokens et de les vérifier
 const jwt = require("jsonwebtoken");
 
@@ -7,7 +11,7 @@ module.exports = (req, res, next) => {
             // On récupère le token dans le header
             const token = req.headers.authorization.split(" ")[1];
             // On décode le token avec notre clé secrète
-            const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+            const decodedToken = jwt.verify(token, secretToken);
             // On récupère le userId
             const userId = decodedToken.userId;
             // On attribue le userId à l'objet requête

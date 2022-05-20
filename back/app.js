@@ -1,3 +1,7 @@
+// On créé l'accès aux variable du .env
+const dotenv = require("dotenv").config();
+const dbConnect = process.env.DB_CONNECT;
+
 // On importe express
 const express = require("express");
 
@@ -21,7 +25,7 @@ app.use(express.json());
 
 // Connexion avec la base de données
 mongoose
-      .connect("mongodb+srv://Rhomard:mdpdatabase@piiquante-cluster.zee9n.mongodb.net/Piiquante?retryWrites=true&w=majority", {
+      .connect(dbConnect, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
       })

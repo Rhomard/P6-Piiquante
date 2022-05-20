@@ -44,3 +44,4 @@ Thumbs.db
 /back/node_modules
 /front/node_modules
 /back/images
+/back/.env

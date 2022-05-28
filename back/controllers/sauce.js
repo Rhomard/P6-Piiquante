@@ -42,13 +42,13 @@ exports.modifySauce = (req, res, next) => {
                         const filename = sauce.imageUrl.split("/images/")[1];
                         fs.unlink(`images/${filename}`, () => {
                               Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-                                    .then(() => res.status(200).json({ message: "Objet et image modifiés !" }))
+                                    .then(() => res.status(201).json({ message: "Objet et image modifiés !" }))
                                     .catch((error) => res.status(400).json({ error }));
                         });
                   } else if (!req.file) {
                         const sauceObject = { ...req.body };
                         Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-                              .then(() => res.status(200).json({ message: "Objet modifié !" }))
+                              .then(() => res.status(201).json({ message: "Objet modifié !" }))
                               .catch((error) => res.status(400).json({ error }));
                   }
             })
@@ -114,7 +114,7 @@ exports.likeDislike = (req, res, next) => {
                   valeursQuiChangent.dislikes = valeursQuiChangent.usersDisliked.length;
 
                   Sauce.updateOne({ _id: sauceId }, valeursQuiChangent)
-                        .then(() => res.status(200).json({ message: "Action sur le like ou dislike prise en compte !" }))
+                        .then(() => res.status(201).json({ message: "Action sur le like ou dislike prise en compte !" }))
                         .catch((error) => res.status(400).json({ error }));
             })
 

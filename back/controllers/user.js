@@ -1,3 +1,7 @@
+// On créé l'accès aux variable du .env
+const dotenv = require("dotenv").config();
+const secretToken = process.env.SECRET_TOKEN;
+
 // On importe le modèle pour les users
 const User = require("../models/User");
 
@@ -46,7 +50,7 @@ exports.login = (req, res, next) => {
                               res.status(200).json({
                                     userId: user._id,
                                     // On encode le userId pour que seul l'utilisateur qui a entré une sauce puisse la modifier ou supprimer
-                                    token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" }),
+                                    token: jwt.sign({ userId: user._id }, secretToken, { expiresIn: "24h" }),
                               });
                         })
                         .catch((error) => res.status(500).json({ error }));

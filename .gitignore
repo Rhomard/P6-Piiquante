@@ -45,3 +45,5 @@ Thumbs.db
 /front/node_modules
 /back/images
 /back/.env
+/front/.DS_Store
+/back/.DS_Store
